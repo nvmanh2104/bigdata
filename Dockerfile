@@ -1,7 +1,7 @@
 # FROM ubuntu:14.04
 FROM ubuntu:18.04
 
-MAINTAINER sonnguyen <son20112074@gmail.com>
+MAINTAINER manh.ngovan <manh.ngovan@gmail.com>
 
 WORKDIR /root
 
@@ -47,6 +47,7 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     mv /tmp/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml && \
     mv /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
     mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
+    mv /tmp/workers $HADOOP_HOME/etc/hadoop/workers && \
     mv /tmp/start-hadoop.sh ~/start-hadoop.sh && \
     mv /tmp/run-wordcount.sh ~/run-wordcount.sh
 
