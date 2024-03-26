@@ -1,7 +1,7 @@
 version: '3.6'
 services:
     hadoop-master:
-        image: ngovanmanh/hadoop:3.2.0       
+        image: ngovanmanh/hadoop:3.2.1       
         ports:
             - 50070:50070
             - 60010:60010
@@ -30,7 +30,7 @@ services:
             - namenode:/root/hdfs/namenode
 
     hadoop-slave1:
-        image: ngovanmanh/hadoop:3.2.0       
+        image: ngovanmanh/hadoop:3.2.1       
         ports:
             - 50071:50070
             - 6001:60010
@@ -53,7 +53,7 @@ services:
             - datanode1:/root/hdfs/datanode
 
     hadoop-slave2:
-        image: ngovanmanh/hadoop:3.2.0       
+        image: ngovanmanh/hadoop:3.2.1       
         ports:
             - 50072:50070
             - 60012:60010
