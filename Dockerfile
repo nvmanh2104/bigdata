@@ -108,5 +108,5 @@ WORKDIR  /home/
 ADD start-terminal.sh /home/start-terminal.sh
 
 #CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
-CMD [ "bash /home/start-terminal.sh" ]
+CMD [ "sh", "start-terminal.sh" ]
 #CMD [ "python3","test.py"]
