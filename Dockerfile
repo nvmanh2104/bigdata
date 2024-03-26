@@ -105,5 +105,5 @@ ENV YARN_NODEMANAGER_USER=root
 
 ADD start-terminal.sh /root/start-terminal.sh
 
-CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
-
+#CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
+CMD [ "sh", "-c", "bash start-terminal.sh" ]
