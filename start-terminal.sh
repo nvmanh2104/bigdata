@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#service ssh start
+service ssh start
 
 echo "Start shell............."
 while [ 1 ]
