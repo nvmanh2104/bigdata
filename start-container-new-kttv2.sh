@@ -11,7 +11,7 @@ do
 	sudo docker rm -f hadoop-slave$i &> /dev/null
 	echo "start hadoop-slave$i container..."
 	sudo docker run -itd \
-	                --net=hadoop \
+	                --net=aws_system_network \
 					-v /opt/bigdata/datanode$i:/root/hdfs/datanode	\
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
