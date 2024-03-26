@@ -103,5 +103,7 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV HADOOP_SECURE_DN_USER=yarn
 ENV YARN_NODEMANAGER_USER=root
 
-CMD [ "sh", "-c", "service ssh start; bash" ]
+ADD start-terminal.sh /root/start-terminal.sh
+
+CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
 
