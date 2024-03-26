@@ -105,8 +105,8 @@ ENV YARN_NODEMANAGER_USER=root
 
 WORKDIR  /home/
 
-ADD test.py /home/test.py
+ADD start-terminal.sh /home/start-terminal.sh
 
 #CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
-#CMD [ "bash /home/start-terminal.sh" ]
-CMD [ "python3","test.py"]
+CMD [ "bash /home/start-terminal.sh" ]
+#CMD [ "python3","test.py"]
