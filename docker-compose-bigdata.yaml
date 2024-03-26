@@ -1,0 +1,186 @@
+version: '3.6'
+services:
+    hadoop-master:
+        image: ngovanmanh/hadoop:3.2.0       
+        ports:
+            - 50070:50070
+            - 60010:60010
+            - 8088:8088
+            - 9870:9870
+        hostname: hadoop-master
+        #environment:
+            
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv1
+        networks:
+            - hadoop
+        
+        volumes:
+            - namenode:/root/hdfs/namenode
+
+    hadoop-slave1:
+        image: ngovanmanh/hadoop:3.2.0       
+        ports:
+            - 50070:50070
+            - 60010:60010
+            - 8088:8088
+            - 9870:9870
+        hostname: hadoop-slave1
+        #environment:
+            
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv1
+        networks:
+            - hadoop
+        
+        volumes:
+            - datanode1:/root/hdfs/datanode
+
+    hadoop-slave2:
+        image: ngovanmanh/hadoop:3.2.0       
+        ports:
+            - 50070:50070
+            - 60010:60010
+            - 8088:8088
+            - 9870:9870
+        hostname: hadoop-slave2
+        #environment:
+            
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv1
+        networks:
+            - hadoop
+        
+        volumes:
+            - datanode2:/root/hdfs/datanode
+
+    hadoop-slave3:
+        image: ngovanmanh/hadoop:3.2.0       
+        ports:
+            - 50070:50070
+            - 60010:60010
+            - 8088:8088
+            - 9870:9870
+        hostname: hadoop-slave3
+        #environment:
+            
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv2
+        networks:
+            - hadoop
+        
+        volumes:
+            - datanode3:/root/hdfs/datanode
+
+    hadoop-slave4:
+        image: ngovanmanh/hadoop:3.2.0       
+        ports:
+            - 50070:50070
+            - 60010:60010
+            - 8088:8088
+            - 9870:9870
+        hostname: hadoop-slave4
+        #environment:
+            
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv2
+        networks:
+            - hadoop
+        
+        volumes:
+            - datanode4:/root/hdfs/datanode
+
+    hadoop-slave5:
+        image: ngovanmanh/hadoop:3.2.0       
+        ports:
+            - 50070:50070
+            - 60010:60010
+            - 8088:8088
+            - 9870:9870
+        hostname: hadoop-slave5
+        #environment:
+            
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv2
+        networks:
+            - hadoop
+        
+        volumes:
+            - datanode5:/root/hdfs/datanode            
+
+networks:
+    hadoop:
+        external: true
+
+volumes:
+    namenode:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/namenode" 
+    
+    datanode1:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/datanode1"
+    
+    datanode2:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/datanode2"     
+
+    datanode3:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/datanode3"        
+    
+    datanode4:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/datanode4"    
+
+    datanode5:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/datanode5" 
