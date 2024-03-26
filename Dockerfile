@@ -103,7 +103,9 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV HADOOP_SECURE_DN_USER=yarn
 ENV YARN_NODEMANAGER_USER=root
 
-ADD start-terminal.sh /home/start-terminal.sh
+WORKDIR  /home/
+
+ADD test.py /home/test.py
 
 #CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
 #CMD [ "bash /home/start-terminal.sh" ]
