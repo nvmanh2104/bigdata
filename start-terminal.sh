@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #service ssh start
 
 echo "Start shell............."
