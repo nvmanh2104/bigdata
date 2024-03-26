@@ -32,10 +32,10 @@ services:
     hadoop-slave1:
         image: ngovanmanh/hadoop:3.2.0       
         ports:
-            - 50070:50070
-            - 60010:60010
-            - 8088:8088
-            - 9870:9870
+            - 50071:50070
+            - 6001:60010
+            - 8081:8088
+            - 9871:9870
         hostname: hadoop-slave1
         #environment:
             
@@ -55,10 +55,10 @@ services:
     hadoop-slave2:
         image: ngovanmanh/hadoop:3.2.0       
         ports:
-            - 50070:50070
-            - 60010:60010
-            - 8088:8088
-            - 9870:9870
+            - 50072:50070
+            - 60012:60010
+            - 8082:8088
+            - 9872:9870
         hostname: hadoop-slave2
         #environment:
             
@@ -78,10 +78,10 @@ services:
     hadoop-slave3:
         image: ngovanmanh/hadoop:3.2.0       
         ports:
-            - 50070:50070
-            - 60010:60010
-            - 8088:8088
-            - 9870:9870
+            - 50073:50070
+            - 60013:60010
+            - 8083:8088
+            - 9873:9870
         hostname: hadoop-slave3
         #environment:
             
@@ -101,10 +101,10 @@ services:
     hadoop-slave4:
         image: ngovanmanh/hadoop:3.2.0       
         ports:
-            - 50070:50070
-            - 60010:60010
-            - 8088:8088
-            - 9870:9870
+            - 50074:50070
+            - 60014:60010
+            - 8084:8088
+            - 9874:9870
         hostname: hadoop-slave4
         #environment:
             
@@ -124,10 +124,10 @@ services:
     hadoop-slave5:
         image: ngovanmanh/hadoop:3.2.0       
         ports:
-            - 50070:50070
-            - 60010:60010
-            - 8088:8088
-            - 9870:9870
+            - 50075:50070
+            - 60015:60010
+            - 8085:8088
+            - 9875:9870
         hostname: hadoop-slave5
         #environment:
             
