@@ -76,7 +76,7 @@ services:
             - datanode2:/root/hdfs/datanode
 
     hadoop-slave3:
-        image: ngovanmanh/hadoop:3.2.0       
+        image: ngovanmanh/hadoop:3.2.1       
         ports:
             - 50073:50070
             - 60013:60010
@@ -99,7 +99,7 @@ services:
             - datanode3:/root/hdfs/datanode
 
     hadoop-slave4:
-        image: ngovanmanh/hadoop:3.2.0       
+        image: ngovanmanh/hadoop:3.2.1       
         ports:
             - 50074:50070
             - 60014:60010
@@ -122,7 +122,7 @@ services:
             - datanode4:/root/hdfs/datanode
 
     hadoop-slave5:
-        image: ngovanmanh/hadoop:3.2.0       
+        image: ngovanmanh/hadoop:3.2.1     
         ports:
             - 50075:50070
             - 60015:60010
