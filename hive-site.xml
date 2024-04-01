@@ -1,7 +1,7 @@
 <configuration>
 <property>
 <name>javax.jdo.option.ConnectionURL</name>
-<value>jdbc:mysql://vosint_mysql/hivedb</value>
+<value>jdbc:mysql://kttv_mysql/hivedb</value>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionDriverName</name>

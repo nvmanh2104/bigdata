@@ -7,6 +7,7 @@ services:
             - 60010:60010
             - 8088:8088
             - 9870:9870
+            - 6660:6660
         hostname: hadoop-master
         #environment:
             
@@ -36,6 +37,7 @@ services:
             - 6001:60010
             - 8081:8088
             - 9871:9870
+            - 6661:6660
         hostname: hadoop-slave1
         #environment:
             
@@ -59,6 +61,7 @@ services:
             - 60012:60010
             - 8082:8088
             - 9872:9870
+            - 6662:6660
         hostname: hadoop-slave2
         #environment:
             
@@ -82,6 +85,7 @@ services:
             - 60013:60010
             - 8083:8088
             - 9873:9870
+            - 6663:6660
         hostname: hadoop-slave3
         #environment:
             
@@ -105,6 +109,7 @@ services:
             - 60014:60010
             - 8084:8088
             - 9874:9870
+            - 6664:6660
         hostname: hadoop-slave4
         #environment:
             
@@ -128,6 +133,7 @@ services:
             - 60015:60010
             - 8085:8088
             - 9875:9870
+            - 6665:6660
         hostname: hadoop-slave5
         #environment:
             
