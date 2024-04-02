@@ -11,3 +11,5 @@ $HADOOP_HOME/sbin/start-yarn.sh
 echo -e "\n"
 
 bash /usr/local/hbase/bin/start-hbase.sh
+
+hbase thrift start -p 6660

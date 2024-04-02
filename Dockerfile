@@ -81,7 +81,7 @@ ENV PATH=$PATH:/usr/local/hbase/bin
 # format namenode
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
-RUN apt install vim -y
+RUN apt install nano -y
 
 # Install phonenix
 RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
@@ -90,6 +90,14 @@ RUN mv phoenix-hbase-2.4.0-5.1.2-bin /usr/lib/phoenix
 RUN cp /usr/lib/phoenix/phoenix-server-hbase*.jar /usr/local/hbase/lib
 ENV PHOENIX_HOME=/usr/lib/phoenix
 ENV PATH=$PATH:$PHOENIX_HOME/bin
+# Install phonenix query server
+RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-queryserver-6.0.0/phoenix-queryserver-6.0.0-bin.tar.gz
+RUN tar -xvf phoenix-queryserver-6.0.0-bin.tar.gz
+RUN mv phoenix-queryserver-6.0.0 /usr/lib/phoenix-queryserver
+RUN cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/lib
+ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
+ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
+ENV PATH=$PATH:/usr/local/hbase/lib
 
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HBASE_HOME=/usr/local/hbase
