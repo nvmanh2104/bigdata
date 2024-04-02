@@ -71,7 +71,7 @@ services:
             replicas: 1
             placement:
                 constraints:
-                    - node.hostname==kttv1
+                    - node.hostname==kttv2
         networks:
             - hadoop
         
@@ -102,53 +102,53 @@ services:
         volumes:
             - datanode3:/root/hdfs/datanode
 
-    hadoop-slave4:
-        image: ngovanmanh/hadoop:3.2.1       
-        ports:
-            - 50074:50070
-            - 60014:60010
-            - 8084:8088
-            - 9874:9870
-            - 6664:6660
-        hostname: hadoop-slave4
-        #environment:
+    # hadoop-slave4:
+    #     image: ngovanmanh/hadoop:3.2.1       
+    #     ports:
+    #         - 50074:50070
+    #         - 60014:60010
+    #         - 8084:8088
+    #         - 9874:9870
+    #         - 6664:6660
+    #     hostname: hadoop-slave4
+    #     #environment:
             
-        deploy:
-            restart_policy:
-                condition: on-failure
-            replicas: 1
-            placement:
-                constraints:
-                    - node.hostname==kttv2
-        networks:
-            - hadoop
+    #     deploy:
+    #         restart_policy:
+    #             condition: on-failure
+    #         replicas: 1
+    #         placement:
+    #             constraints:
+    #                 - node.hostname==kttv2
+    #     networks:
+    #         - hadoop
         
-        volumes:
-            - datanode4:/root/hdfs/datanode
+    #     volumes:
+    #         - datanode4:/root/hdfs/datanode
 
-    hadoop-slave5:
-        image: ngovanmanh/hadoop:3.2.1     
-        ports:
-            - 50075:50070
-            - 60015:60010
-            - 8085:8088
-            - 9875:9870
-            - 6665:6660
-        hostname: hadoop-slave5
-        #environment:
+    # hadoop-slave5:
+    #     image: ngovanmanh/hadoop:3.2.1     
+    #     ports:
+    #         - 50075:50070
+    #         - 60015:60010
+    #         - 8085:8088
+    #         - 9875:9870
+    #         - 6665:6660
+    #     hostname: hadoop-slave5
+    #     #environment:
             
-        deploy:
-            restart_policy:
-                condition: on-failure
-            replicas: 1
-            placement:
-                constraints:
-                    - node.hostname==kttv2
-        networks:
-            - hadoop
+    #     deploy:
+    #         restart_policy:
+    #             condition: on-failure
+    #         replicas: 1
+    #         placement:
+    #             constraints:
+    #                 - node.hostname==kttv2
+    #     networks:
+    #         - hadoop
         
-        volumes:
-            - datanode5:/root/hdfs/datanode            
+    #     volumes:
+    #         - datanode5:/root/hdfs/datanode            
 
 networks:
     hadoop:
@@ -183,16 +183,16 @@ volumes:
             o: bind
             device: "/opt/bigdata/datanode3"        
     
-    datanode4:   
-        driver: local     
-        driver_opts:
-            type: none
-            o: bind
-            device: "/opt/bigdata/datanode4"    
+    # datanode4:   
+    #     driver: local     
+    #     driver_opts:
+    #         type: none
+    #         o: bind
+    #         device: "/opt/bigdata/datanode4"    
 
-    datanode5:   
-        driver: local     
-        driver_opts:
-            type: none
-            o: bind
-            device: "/opt/bigdata/datanode5" 
+    # datanode5:   
+    #     driver: local     
+    #     driver_opts:
+    #         type: none
+    #         o: bind
+    #         device: "/opt/bigdata/datanode5" 
