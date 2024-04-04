@@ -98,6 +98,26 @@ RUN cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/li
 ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
 ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
 ENV PATH=$PATH:/usr/local/hbase/lib
+# Install Spark
+RUN mkdir -p /usr/local/spark
+ARG SPARK_VERSION=3.3.3
+RUN curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
+ && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 \
+ && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
+ENV PATH="/usr/local/spark/sbin:/usr/local/spark/bin:${PATH}"
+ENV SPARK_HOME=/usr/local/spark
+ENV SPARK_MASTER="spark://hadoop-master:7077"
+ENV SPARK_MASTER_HOST hadoop-master
+ENV SPARK_MASTER_PORT 7077
+ENV PYSPARK_PYTHON python3
+RUN mv /tmp/spark-defaults.conf $SPARK_HOME/conf
+RUN chmod u+x /usr/local/spark/sbin/* && \
+    chmod u+x /usr/local/spark/bin/*
+
+ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HBASE_HOME=/usr/local/hbase
