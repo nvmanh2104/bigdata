@@ -8,6 +8,8 @@ WORKDIR /root
 RUN apt-get update && apt-get install software-properties-common -y
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt install python3.7 -y
+RUN apt install python3-pip -y 
+RUN pip3 install pip -U
 
 RUN add-apt-repository ppa:openjdk-r/ppa
 
@@ -81,7 +83,7 @@ ENV PATH=$PATH:/usr/local/hbase/bin
 # format namenode
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
-RUN apt install nano -y
+RUN apt install nano curl -y
 
 # Install phonenix
 RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
@@ -100,7 +102,8 @@ ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
 ENV PATH=$PATH:/usr/local/hbase/lib
 # Install Spark
 RUN mkdir -p /usr/local/spark
-ARG SPARK_VERSION=3.3.3
+RUN mkdir -p /usr/local/zookeeper
+ARG SPARK_VERSION=3.4.2
 RUN curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
  && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 \
  && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
@@ -116,7 +119,6 @@ ENV PYSPARK_PYTHON python3
 RUN mv /tmp/spark-defaults.conf $SPARK_HOME/conf
 RUN chmod u+x /usr/local/spark/sbin/* && \
     chmod u+x /usr/local/spark/bin/*
-
 ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 ENV HADOOP_HOME=/usr/local/hadoop
@@ -131,10 +133,17 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV HADOOP_SECURE_DN_USER=yarn
 ENV YARN_NODEMANAGER_USER=root
 
-WORKDIR  /home/
+COPY spark-ha-master.conf .
+COPY spark-ha-secondary.conf .
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
-ADD start-terminal.sh /home/start-terminal.sh
+ENTRYPOINT ["./entrypoint.sh"]
+
+#WORKDIR  /home/
+
+#ADD start-terminal.sh /home/start-terminal.sh
 
 #CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
-CMD [ "sh", "start-terminal.sh" ]
+#CMD [ "sh", "start-terminal.sh" ]
 #CMD [ "python3","test.py"]

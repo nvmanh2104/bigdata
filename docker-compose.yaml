@@ -2,21 +2,26 @@ version: '3.6'
 services:
     hadoop-master:
         image: ngovanmanh/hadoop:3.2.1       
+        entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 50070:50070
             - 60010:60010
             - 8088:8088
             - 9870:9870
             - 6660:6660
+
+            - 9090:8080
+            - 7077:7077
         hostname: hadoop-master
-        #environment:
-            
-        depends_on:
-            - hadoop-slave1
-            - hadoop-slave2
-            - hadoop-slave3
-            - hadoop-slave4
-            - hadoop-slave5     
+        environment:
+            - SPARK_NO_DAEMONIZE=true    
+            - 
+        # depends_on:
+        #     - hadoop-slave1
+        #     - hadoop-slave2
+        #     - hadoop-slave3
+        #     - hadoop-slave4
+        #     - hadoop-slave5     
         deploy:
             restart_policy:
                 condition: on-failure
@@ -29,9 +34,42 @@ services:
         
         volumes:
             - namenode:/root/hdfs/namenode
+            - spark-master-logs:/opt/spark/spark-events
+            - spark-master-zookeeper:/usr/local/zookeeper
+
+    hadoop-secondary:
+        image: ngovanmanh/hadoop:3.2.1       
+        entrypoint: ['./entrypoint.sh', 'master']
+        ports:
+            - 51070:50070
+            - 61010:60010
+            - 8188:8088
+            - 9170:9870
+            - 6160:6660
+
+            - 9190:8080
+            - 7177:7077
+        hostname: hadoop-secondary
+        environment:
+            - SPARK_NO_DAEMONIZE=true              
+        deploy:
+            restart_policy:
+                condition: on-failure
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname==kttv2
+        networks:
+            - hadoop
+        
+        volumes:
+            - namenode:/root/hdfs/namenode
+            - spark-master-logs:/opt/spark/spark-events
+            - spark-master-zookeeper:/usr/local/zookeeper
 
     hadoop-slave1:
-        image: ngovanmanh/hadoop:3.2.1       
+        image: ngovanmanh/hadoop:3.2.1      
+        entrypoint: ['./entrypoint.sh', 'worker'] 
         ports:
             - 50071:50070
             - 6001:60010
@@ -39,8 +77,11 @@ services:
             - 9871:9870
             - 6661:6660
         hostname: hadoop-slave1
-        #environment:
-            
+        environment:
+            - SPARK_NO_DAEMONIZE=true    
+        depends_on:
+            - hadoop-master
+            - hadoop-secondary
         deploy:
             restart_policy:
                 condition: on-failure
@@ -53,9 +94,11 @@ services:
         
         volumes:
             - datanode1:/root/hdfs/datanode
+            - spark-node1-logs:/opt/spark/spark-events
 
     hadoop-slave2:
-        image: ngovanmanh/hadoop:3.2.1       
+        image: ngovanmanh/hadoop:3.2.1  
+        entrypoint: ['./entrypoint.sh', 'worker']     
         ports:
             - 50072:50070
             - 60012:60010
@@ -63,8 +106,11 @@ services:
             - 9872:9870
             - 6662:6660
         hostname: hadoop-slave2
-        #environment:
-            
+        environment:
+            - SPARK_NO_DAEMONIZE=true
+        depends_on:
+            - hadoop-master   
+            - hadoop-secondary
         deploy:
             restart_policy:
                 condition: on-failure
@@ -77,9 +123,11 @@ services:
         
         volumes:
             - datanode2:/root/hdfs/datanode
+            - spark-node2-logs:/opt/spark/spark-events
 
     hadoop-slave3:
-        image: ngovanmanh/hadoop:3.2.1       
+        image: ngovanmanh/hadoop:3.2.1   
+        entrypoint: ['./entrypoint.sh', 'worker']    
         ports:
             - 50073:50070
             - 60013:60010
@@ -87,8 +135,11 @@ services:
             - 9873:9870
             - 6663:6660
         hostname: hadoop-slave3
-        #environment:
-            
+        environment:
+            - SPARK_NO_DAEMONIZE=true   
+        depends_on:
+            - hadoop-master 
+            - hadoop-secondary
         deploy:
             restart_policy:
                 condition: on-failure
@@ -101,6 +152,7 @@ services:
         
         volumes:
             - datanode3:/root/hdfs/datanode
+            - spark-node3-logs:/opt/spark/spark-events
 
     # hadoop-slave4:
     #     image: ngovanmanh/hadoop:3.2.1       
@@ -181,7 +233,44 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: "/opt/bigdata/datanode3"        
+            device: "/opt/bigdata/datanode3"   
+
+    spark-master-logs:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/spark/spark-master-log" 
+
+    spark-node1-logs:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/spark/spark-node1-log"     
+
+    spark-node2-logs:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/spark/spark-node2-log" 
+
+    spark-node3-logs:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/spark/spark-node3-log"
+
+    spark-master-zookeeper:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/spark/zookeeper" 
+    
+
     
     # datanode4:   
     #     driver: local     
