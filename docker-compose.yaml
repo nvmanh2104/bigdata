@@ -38,7 +38,7 @@ services:
 
     hadoop-secondary:
         image: ngovanmanh/hadoop:3.2.1       
-        entrypoint: ['./entrypoint.sh', 'master']
+        entrypoint: ['./entrypoint.sh', 'secondary']
         ports:
             - 51070:50070
             - 61010:60010
