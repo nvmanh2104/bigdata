@@ -83,7 +83,7 @@ ENV PATH=$PATH:/usr/local/hbase/bin
 # format namenode
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
-RUN apt install nano curl -y
+RUN apt install nano curl net-tools iputils-ping -y
 
 # Install phonenix
 RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz

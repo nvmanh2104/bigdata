@@ -15,7 +15,6 @@ services:
         hostname: hadoop-master
         environment:
             - SPARK_NO_DAEMONIZE=true    
-            - 
         # depends_on:
         #     - hadoop-slave1
         #     - hadoop-slave2
