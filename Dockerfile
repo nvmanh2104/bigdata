@@ -133,8 +133,7 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV HADOOP_SECURE_DN_USER=yarn
 ENV YARN_NODEMANAGER_USER=root
 
-COPY spark-ha-master.conf .
-COPY spark-ha-secondary.conf .
+COPY spark-ha.conf .
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
