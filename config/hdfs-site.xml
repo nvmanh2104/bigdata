@@ -59,5 +59,8 @@
         <name>dfs.ha.fencing.ssh.private-key-files</name>
         <value>~/.ssh/id_rsa</value>
     </property>
-    
+    <property>
+        <name>dfs.ha.nn.not-become-active-in-safemode</name>
+        <value>true</value>
+    </property>
 </configuration>
