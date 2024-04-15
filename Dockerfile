@@ -102,7 +102,7 @@ ENV PATH=$PATH:/usr/local/hbase/lib
 # Install Zookeeper
 RUN mkdir -p /usr/local/zookeeper
 RUN mkdir -p /data/zookeeper
-RUN wget --no-check-certificate wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
+RUN wget --no-check-certificate https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
 RUN tar -xvzf zookeeper-3.4.9.tar.gz
 RUN mv zookeeper-3.4.9 /usr/local/zookeeper
 RUN mv /tmp/zoo.cfg /usr/local/zookeeper/conf
