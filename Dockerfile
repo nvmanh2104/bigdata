@@ -146,12 +146,12 @@ RUN mv /tmp/spark-ha.conf /root/spark-ha.conf
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+#ENTRYPOINT ["./entrypoint.sh"]
 
-#WORKDIR  /home/
+WORKDIR  /home/
 
-#ADD start-terminal.sh /home/start-terminal.sh
+ADD start-terminal.sh /home/start-terminal.sh
 
-#CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
+CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
 #CMD [ "sh", "start-terminal.sh" ]
 #CMD [ "python3","test.py"]

@@ -13,7 +13,7 @@ then
   echo $ZOOKEEPER_ID > $ZOOKEEPER_DATA/myid
   systemctl start zk.service
   systemctl enable zk.service
-  $ZOOKEEPER_HOME/bin/zkCli.sh -server 127.0.0.1:2181
+  $ZOOKEEPER_HOME/bin/zkCli.sh -server localhost:2181
   # start spark
   start-master.sh -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 elif [ "$SPARK_WORKLOAD" == "worker" ];
