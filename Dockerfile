@@ -100,13 +100,15 @@ ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
 ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
 ENV PATH=$PATH:/usr/local/hbase/lib
 # Install Zookeeper
-RUN mkdir -p /usr/local/zookeeper
+RUN mkdir -p /opt/zookeeper
 RUN mkdir -p /data/zookeeper
 RUN wget --no-check-certificate https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
 RUN tar -xvf zookeeper-3.4.9.tar.gz
-RUN mv zookeeper-3.4.9 /usr/local/zookeeper
-RUN mv /tmp/zoo.cfg /usr/local/zookeeper/conf
-ENV ZOOKEEPER_HOME=/usr/local/zookeeper
+RUN mv zookeeper-3.4.9 /opt/zookeeper
+RUN mv /tmp/zoo.cfg /opt/zookeeper/conf/zoo.cfg
+RUN mv /tmp/zk.service /etc/systemd/system/zk.service
+RUN ls /opt/zookeeper
+ENV ZOOKEEPER_HOME=/opt/zookeeper
 ENV ZOOKEEPER_DATA=/data/zookeeper
 
 # Install Spark
@@ -141,7 +143,7 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV HADOOP_SECURE_DN_USER=yarn
 ENV YARN_NODEMANAGER_USER=root
 
-RUN mv /tmp/spark-ha.conf /root
+RUN mv /tmp/spark-ha.conf /root/spark-ha.conf
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
