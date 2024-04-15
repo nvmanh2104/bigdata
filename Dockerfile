@@ -103,10 +103,8 @@ ENV PATH=$PATH:/usr/local/hbase/lib
 RUN mkdir -p /opt/zookeeper
 RUN mkdir -p /data/zookeeper
 RUN wget --no-check-certificate https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
-RUN tar -xvf zookeeper-3.4.9.tar.gz
-RUN cp -r zookeeper-3.4.9/* /opt/zookeeper
-RUN ls /opt/zookeeper
-RUN rm -r zookeeper-3.4.9
+RUN tar xvzf zookeeper-3.4.9.tar.gz  --directory /opt/zookeeper --strip-components 1
+RUN rm -rf zookeeper-3.4.9.tar.gz
 RUN mv /tmp/zoo.cfg /opt/zookeeper/conf/zoo.cfg
 RUN mv /tmp/zk.service /etc/systemd/system/zk.service
 ENV ZOOKEEPER_HOME=/opt/zookeeper
