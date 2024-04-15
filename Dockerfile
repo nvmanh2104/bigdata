@@ -104,10 +104,11 @@ RUN mkdir -p /opt/zookeeper
 RUN mkdir -p /data/zookeeper
 RUN wget --no-check-certificate https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
 RUN tar -xvf zookeeper-3.4.9.tar.gz
-RUN mv zookeeper-3.4.9 /opt/zookeeper
+RUN cp -r zookeeper-3.4.9/* /opt/zookeeper
+RUN ls /opt/zookeeper
+RUN rm -r zookeeper-3.4.9
 RUN mv /tmp/zoo.cfg /opt/zookeeper/conf/zoo.cfg
 RUN mv /tmp/zk.service /etc/systemd/system/zk.service
-RUN ls /opt/zookeeper
 ENV ZOOKEEPER_HOME=/opt/zookeeper
 ENV ZOOKEEPER_DATA=/data/zookeeper
 
