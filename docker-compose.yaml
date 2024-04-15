@@ -1,7 +1,7 @@
 version: '3.6'
 services:
     hadoop-master1:
-        image: ngovanmanh/hadoop:3.2.1       
+        image: ngovanmanh/hadoop:3.2.2      
         entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 50070:50070
@@ -38,7 +38,7 @@ services:
             - zookeeper1-data:/data/zookeeper
 
     hadoop-master2:
-        image: ngovanmanh/hadoop:3.2.1       
+        image: ngovanmanh/hadoop:3.2.2      
         entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 51070:50070
@@ -69,7 +69,7 @@ services:
             - zookeeper2-data:/data/zookeeper
 
     hadoop-master3:
-        image: ngovanmanh/hadoop:3.2.1       
+        image: ngovanmanh/hadoop:3.2.2       
         entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 52070:50070
@@ -100,7 +100,7 @@ services:
             - zookeeper3-data:/data/zookeeper
 
     hadoop-slave1:
-        image: ngovanmanh/hadoop:3.2.1      
+        image: ngovanmanh/hadoop:3.2.2      
         entrypoint: ['./entrypoint.sh', 'worker'] 
         ports:
             - 50071:50070
@@ -130,7 +130,7 @@ services:
             - spark-node1-logs:/opt/spark/spark-events
 
     hadoop-slave2:
-        image: ngovanmanh/hadoop:3.2.1  
+        image: ngovanmanh/hadoop:3.2.2  
         entrypoint: ['./entrypoint.sh', 'worker']     
         ports:
             - 50072:50070
@@ -160,7 +160,7 @@ services:
             - spark-node2-logs:/opt/spark/spark-events
 
     hadoop-slave3:
-        image: ngovanmanh/hadoop:3.2.1   
+        image: ngovanmanh/hadoop:3.2.2  
         entrypoint: ['./entrypoint.sh', 'worker']    
         ports:
             - 50073:50070
@@ -190,7 +190,7 @@ services:
             - spark-node3-logs:/opt/spark/spark-events
 
     # hadoop-slave4:
-    #     image: ngovanmanh/hadoop:3.2.1       
+    #     image: ngovanmanh/hadoop:3.2.2
     #     ports:
     #         - 50074:50070
     #         - 60014:60010
@@ -214,7 +214,7 @@ services:
     #         - datanode4:/root/hdfs/datanode
 
     # hadoop-slave5:
-    #     image: ngovanmanh/hadoop:3.2.1     
+    #     image: ngovanmanh/hadoop:3.2.2     
     #     ports:
     #         - 50075:50070
     #         - 60015:60010
