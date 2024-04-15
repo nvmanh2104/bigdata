@@ -18,8 +18,9 @@ then
   start-master.sh -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 elif [ "$SPARK_WORKLOAD" == "worker" ];
 then
-  start-worker.sh spark://hadoop-master:7077,hadoop-secondary:7077
+  start-worker.sh spark://hadoop-master1:2181,hadoop-master2:2181,hadoop-master3:2181
 else
  # secondary master
+   echo "else"
  #start-master.sh -h hadoop-secondary -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi
