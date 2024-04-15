@@ -14,10 +14,10 @@
         <name>dfs.replication</name>
         <value>2</value>
     </property>
-    <property> 
+    <!-- <property> 
         <name>dfs.namenode.secondary.http-address</name>
         <value>hadoop-secondary:9868</value>
-    </property>
+    </property> -->
     <!-- Config HA -->
     <property>
    <name>dfs.nameservices</name>
@@ -25,24 +25,32 @@
    </property>
    <property>
         <name>dfs.ha.namenodes.kttvcluster</name>
-        <value>hadoop-master,hadoop-secondary</value>
+        <value>hadoop-master1,hadoop-master2,hadoop-master3</value>
     </property>
     <property>
-        <name>dfs.namenode.rpc-address.kttvcluster.hadoop-master</name>
-        <value>hadoop-master:8020</value>
+        <name>dfs.namenode.rpc-address.kttvcluster.hadoop-master1</name>
+        <value>hadoop-master1:8020</value>
     </property>
     <property>
-        <name>dfs.namenode.rpc-address.kttvcluster.hadoop-secondary</name>
-        <value>hadoop-secondary:8020</value>
+        <name>dfs.namenode.rpc-address.kttvcluster.hadoop-master2</name>
+        <value>hadoop-master2:8020</value>
     </property>    
     <property>
-    <name>dfs.namenode.http-address.kttvcluster.hadoop-master</name>
-    <value>hadoop-master:9870</value>
+        <name>dfs.namenode.rpc-address.kttvcluster.hadoop-master3</name>
+        <value>hadoop-master3:8020</value>
+    </property> 
+    <property>
+        <name>dfs.namenode.http-address.kttvcluster.hadoop-master1</name>
+        <value>hadoop-master1:9870</value>
     </property>
     <property>
-    <name>dfs.namenode.http-address.kttvcluster.hadoop-secondary</name>
-    <value>hadoop-secondary:9870</value>
+        <name>dfs.namenode.http-address.kttvcluster.hadoop-master2</name>
+        <value>hadoop-master2:9872</value>
     </property>    
+    <property>
+        <name>dfs.namenode.http-address.kttvcluster.hadoop-master3</name>
+        <value>hadoop-master3:9872</value>
+    </property> 
     <property>
         <name>dfs.namenode.shared.edits.dir</name>
         <value>file:///mnt/dfs/ha-name-dir-shared</value>
@@ -63,4 +71,10 @@
         <name>dfs.ha.nn.not-become-active-in-safemode</name>
         <value>true</value>
     </property>
+     <!-- automatic failover -->
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+
 </configuration>

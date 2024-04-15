@@ -84,7 +84,6 @@ ENV PATH=$PATH:/usr/local/hbase/bin
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
 RUN apt install nano curl net-tools iputils-ping -y
-
 # Install phonenix
 RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
 RUN tar -xvf phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
@@ -100,9 +99,18 @@ RUN cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/li
 ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
 ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
 ENV PATH=$PATH:/usr/local/hbase/lib
+# Install Zookeeper
+RUN mkdir -p /usr/local/zookeeper
+RUN mkdir -p /data/zookeeper
+RUN wget --no-check-certificate wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
+RUN tar -xvzf zookeeper-3.4.9.tar.gz
+RUN mv zookeeper-3.4.9 /usr/local/zookeeper
+RUN mv /tmp/zoo.cfg /usr/local/zookeeper/conf
+ENV ZOOKEEPER_HOME=/usr/local/zookeeper
+ENV ZOOKEEPER_DATA=/data/zookeeper
+
 # Install Spark
 RUN mkdir -p /usr/local/spark
-RUN mkdir -p /usr/local/zookeeper
 ARG SPARK_VERSION=3.4.2
 RUN curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
  && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 \
@@ -133,7 +141,7 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV HADOOP_SECURE_DN_USER=yarn
 ENV YARN_NODEMANAGER_USER=root
 
-COPY spark-ha.conf .
+RUN mv /tmp/spark-ha.conf /root
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
