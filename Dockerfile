@@ -15,6 +15,7 @@ RUN add-apt-repository ppa:openjdk-r/ppa
 
 # install openssh-server, openjdk and wget
 RUN apt-get install -y openssh-server openjdk-8-jdk wget
+RUN apt install nano curl net-tools iputils-ping -y
 
 # install hadoop 2.7.2
 # RUN wget https://github.com/kiwenlau/compile-hadoop/releases/download/2.7.2/hadoop-2.7.2.tar.gz  && \
@@ -82,8 +83,8 @@ ADD regionservers /usr/local/hbase/conf/regionservers
 ENV PATH=$PATH:/usr/local/hbase/bin
 # format namenode
 RUN /usr/local/hadoop/bin/hdfs namenode -format
-
-RUN apt install nano curl net-tools iputils-ping -y
+# HA folder shared
+RUN mkdir -p /mnt/dfs/ha-name-dir-shared
 # Install phonenix
 RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
 RUN tar -xvf phoenix-hbase-2.4.0-5.1.2-bin.tar.gz

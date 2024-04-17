@@ -33,6 +33,7 @@ services:
         
         volumes:
             - namenode1:/root/hdfs/namenode
+            - ha-name-dir-shared:/mnt/dfs/ha-name-dir-shared
             - spark-master1-logs:/opt/spark/spark-events           
 
     hadoop-master2:
@@ -62,6 +63,7 @@ services:
         
         volumes:
             - namenode2:/root/hdfs/namenode
+            - ha-name-dir-shared:/mnt/dfs/ha-name-dir-shared
             - spark-master2-logs:/opt/spark/spark-events         
 
     hadoop-master3:
@@ -91,6 +93,7 @@ services:
         
         volumes:
             - namenode3:/root/hdfs/namenode
+            - ha-name-dir-shared:/mnt/dfs/ha-name-dir-shared
             - spark-master3-logs:/opt/spark/spark-events          
 
     hadoop-slave1:
@@ -256,6 +259,13 @@ volumes:
             type: none
             o: bind
             device: "/opt/bigdata/namenode3" 
+    
+    ha-name-dir-shared:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/mnt/dfs/ha-name-dir-shared" 
     
     datanode1:   
         driver: local     
