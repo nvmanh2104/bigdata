@@ -100,15 +100,15 @@ ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
 ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
 ENV PATH=$PATH:/usr/local/hbase/lib
 # Install Zookeeper
-RUN mkdir -p /opt/zookeeper
-RUN mkdir -p /data/zookeeper
-RUN wget --no-check-certificate https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
-RUN tar xvzf zookeeper-3.4.9.tar.gz  --directory /opt/zookeeper --strip-components 1
-RUN rm -rf zookeeper-3.4.9.tar.gz
-RUN mv /tmp/zoo.cfg /opt/zookeeper/conf/zoo.cfg
-RUN mv /tmp/zk.service /etc/systemd/system/zk.service
-ENV ZOOKEEPER_HOME=/opt/zookeeper
-ENV ZOOKEEPER_DATA=/data/zookeeper
+# RUN mkdir -p /opt/zookeeper
+# RUN mkdir -p /data/zookeeper
+# RUN wget --no-check-certificate https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
+# RUN tar xvzf zookeeper-3.4.9.tar.gz  --directory /opt/zookeeper --strip-components 1
+# RUN rm -rf zookeeper-3.4.9.tar.gz
+# RUN mv /tmp/zoo.cfg /opt/zookeeper/conf/zoo.cfg
+# RUN mv /tmp/zk.service /etc/systemd/system/zk.service
+# ENV ZOOKEEPER_HOME=/opt/zookeeper
+# ENV ZOOKEEPER_DATA=/data/zookeeper
 
 # Install Spark
 RUN mkdir -p /usr/local/spark
@@ -121,8 +121,8 @@ RUN pip3 install -r requirements.txt
 
 ENV PATH="/usr/local/spark/sbin:/usr/local/spark/bin:${PATH}"
 ENV SPARK_HOME=/usr/local/spark
-ENV SPARK_MASTER="spark://hadoop-master:7077"
-ENV SPARK_MASTER_HOST hadoop-master
+ENV SPARK_MASTER="spark://hadoop-master1:7077"
+ENV SPARK_MASTER_HOST hadoop-master1
 ENV SPARK_MASTER_PORT 7077
 ENV PYSPARK_PYTHON python3
 RUN mv /tmp/spark-defaults.conf $SPARK_HOME/conf
@@ -152,6 +152,6 @@ WORKDIR  /home/
 
 ADD start-terminal.sh /home/start-terminal.sh
 
-CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
-#CMD [ "sh", "start-terminal.sh" ]
+#CMD [ "sh", "-c", "service ssh start; bash start-terminal.sh" ]
+CMD [ "sh", "start-terminal.sh" ]
 #CMD [ "python3","test.py"]

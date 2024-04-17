@@ -2,7 +2,7 @@ version: '3.6'
 services:
     hadoop-master1:
         image: ngovanmanh/hadoop:3.2.2      
-        entrypoint: ['./entrypoint.sh', 'master']
+        #entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 50070:50070
             - 60010:60010
@@ -14,8 +14,7 @@ services:
             - 7077:7077
         hostname: hadoop-master1
         environment:
-            - SPARK_NO_DAEMONIZE=true    
-            - ZOOKEEPER_ID=1
+            - SPARK_NO_DAEMONIZE=true               
         # depends_on:
         #     - hadoop-slave1
         #     - hadoop-slave2
@@ -34,12 +33,11 @@ services:
         
         volumes:
             - namenode1:/root/hdfs/namenode
-            - spark-master1-logs:/opt/spark/spark-events
-            - zookeeper1-data:/data/zookeeper
+            - spark-master1-logs:/opt/spark/spark-events           
 
     hadoop-master2:
         image: ngovanmanh/hadoop:3.2.2      
-        entrypoint: ['./entrypoint.sh', 'master']
+        #entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 51070:50070
             - 61010:60010
@@ -51,8 +49,7 @@ services:
             - 7177:7077
         hostname: hadoop-master2
         environment:
-            - SPARK_NO_DAEMONIZE=true   
-            - ZOOKEEPER_ID=2           
+            - SPARK_NO_DAEMONIZE=true                 
         deploy:
             restart_policy:
                 condition: on-failure
@@ -65,12 +62,11 @@ services:
         
         volumes:
             - namenode2:/root/hdfs/namenode
-            - spark-master2-logs:/opt/spark/spark-events
-            - zookeeper2-data:/data/zookeeper
+            - spark-master2-logs:/opt/spark/spark-events         
 
     hadoop-master3:
         image: ngovanmanh/hadoop:3.2.2       
-        entrypoint: ['./entrypoint.sh', 'master']
+        #entrypoint: ['./entrypoint.sh', 'master']
         ports:
             - 52070:50070
             - 62010:60010
@@ -82,8 +78,7 @@ services:
             - 7277:7077
         hostname: hadoop-master3
         environment:
-            - SPARK_NO_DAEMONIZE=true    
-            - ZOOKEEPER_ID=3          
+            - SPARK_NO_DAEMONIZE=true              
         deploy:
             restart_policy:
                 condition: on-failure
@@ -96,12 +91,11 @@ services:
         
         volumes:
             - namenode3:/root/hdfs/namenode
-            - spark-master3-logs:/opt/spark/spark-events
-            - zookeeper3-data:/data/zookeeper
-
+            - spark-master3-logs:/opt/spark/spark-events          
+            
     hadoop-slave1:
         image: ngovanmanh/hadoop:3.2.2      
-        entrypoint: ['./entrypoint.sh', 'worker'] 
+        #entrypoint: ['./entrypoint.sh', 'worker'] 
         ports:
             - 50071:50070
             - 6001:60010
@@ -131,7 +125,7 @@ services:
 
     hadoop-slave2:
         image: ngovanmanh/hadoop:3.2.2  
-        entrypoint: ['./entrypoint.sh', 'worker']     
+        #entrypoint: ['./entrypoint.sh', 'worker']     
         ports:
             - 50072:50070
             - 60012:60010
@@ -161,7 +155,7 @@ services:
 
     hadoop-slave3:
         image: ngovanmanh/hadoop:3.2.2  
-        entrypoint: ['./entrypoint.sh', 'worker']    
+        #entrypoint: ['./entrypoint.sh', 'worker']    
         ports:
             - 50073:50070
             - 60013:60010
@@ -325,29 +319,6 @@ volumes:
             type: none
             o: bind
             device: "/opt/bigdata/spark/spark-node3-log"
-
-    zookeeper1-data:   
-        driver: local     
-        driver_opts:
-            type: none
-            o: bind
-            device: "/opt/bigdata/zookeeper/zookeeper1" 
-    
-    zookeeper2-data:   
-        driver: local     
-        driver_opts:
-            type: none
-            o: bind
-            device: "/opt/bigdata/zookeeper/zookeeper2"
-
-    zookeeper3-data:   
-        driver: local     
-        driver_opts:
-            type: none
-            o: bind
-            device: "/opt/bigdata/zookeeper/zookeeper3"
-    
-
     
     # datanode4:   
     #     driver: local     
