@@ -81,10 +81,10 @@ ADD hbase-env.sh  /usr/local/hbase/conf/hbase-env.sh
 ADD hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
 ADD regionservers /usr/local/hbase/conf/regionservers
 ENV PATH=$PATH:/usr/local/hbase/bin
-# format namenode
-RUN /usr/local/hadoop/bin/hdfs namenode -format
 # HA folder shared
 RUN mkdir -p /mnt/dfs/ha-name-dir-shared
+# format namenode
+RUN /usr/local/hadoop/bin/hdfs namenode -format
 # Install phonenix
 RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
 RUN tar -xvf phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
