@@ -51,6 +51,8 @@ services:
         hostname: hadoop-master2
         environment:
             - SPARK_NO_DAEMONIZE=true                 
+        depends_on:
+            - hadoop-master1
         deploy:
             restart_policy:
                 condition: on-failure
@@ -81,6 +83,8 @@ services:
         hostname: hadoop-master3
         environment:
             - SPARK_NO_DAEMONIZE=true              
+        depends_on:
+            - hadoop-master2
         deploy:
             restart_policy:
                 condition: on-failure
