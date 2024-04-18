@@ -25,7 +25,7 @@ fi
 
 if [ "$SPARK_WORKLOAD" == "worker" ];
 then
-    start-worker.sh spark://hadoop-master1:2181,hadoop-master2:2181,hadoop-master3:2181
+    start-worker.sh spark://hadoop-master1:7077,hadoop-master2:7077,hadoop-master3:7077
 fi 
 
 

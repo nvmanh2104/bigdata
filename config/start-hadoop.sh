@@ -2,11 +2,7 @@
 
 echo -e "\n"
 # zookeeper to HA
-$HADOOP_HOME/bin/zkfc -formatZK
-
-$HADOOP_HOME/bin/hdfs --daemon start zkfc
-
-hdfs zkfc -formatZK
+#hdfs zkfc -formatZK
 
 echo -e "\n"
 
