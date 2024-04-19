@@ -15,4 +15,5 @@ $HADOOP_HOME/sbin/start-yarn.sh
 echo -e "\n"
 bash /usr/local/hbase/bin/start-hbase.sh
 
+# chay tren ca 3 master node
 hbase thrift start -p 6660
