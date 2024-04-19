@@ -114,7 +114,7 @@ ENV PATH=$PATH:/usr/local/hbase/lib
 
 # Install Spark
 RUN mkdir -p /usr/local/spark
-ARG SPARK_VERSION=3.4.2
+ARG SPARK_VERSION=3.4.3
 RUN curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
  && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 \
  && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
