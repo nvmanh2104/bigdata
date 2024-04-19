@@ -3,6 +3,14 @@
 #start ssh
 service ssh start
 
+#test
+# echo "Start shell............."
+# while [ 1 ]
+# do    
+#     sleep 20
+# done
+#end test
+
 SPARK_WORKLOAD=$1
 
 echo "SPARK_WORKLOAD: $SPARK_WORKLOAD"
@@ -10,17 +18,17 @@ echo "SPARK_WORKLOAD: $SPARK_WORKLOAD"
 
 if [ "$SPARK_WORKLOAD" == "master1" ];
 then
-    start-master.sh -h hadoop-master1 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
+    start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
 
 if [ "$SPARK_WORKLOAD" == "master2" ];
 then
-    start-master.sh -h hadoop-master2 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
+    start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
 
 if [ "$SPARK_WORKLOAD" == "master3" ];
 then
-    start-master.sh -h hadoop-master3 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
+    start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
 
 if [ "$SPARK_WORKLOAD" == "worker" ];

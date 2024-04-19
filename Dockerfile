@@ -15,7 +15,7 @@ RUN add-apt-repository ppa:openjdk-r/ppa
 
 # install openssh-server, openjdk and wget
 RUN apt-get install -y openssh-server openjdk-8-jdk wget
-RUN apt install nano curl net-tools iputils-ping -y
+RUN apt install nano curl net-tools iputils-ping lsof -y
 
 # install hadoop 2.7.2
 # RUN wget https://github.com/kiwenlau/compile-hadoop/releases/download/2.7.2/hadoop-2.7.2.tar.gz  && \
@@ -152,7 +152,7 @@ RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-#WORKDIR  /home/
-#ADD start-terminal.sh /home/start-terminal.sh
-#CMD [ "sh", "start-terminal.sh" ]
+# WORKDIR  /home/
+# ADD start-terminal.sh /home/start-terminal.sh
+# CMD [ "sh", "start-terminal.sh" ]
 
