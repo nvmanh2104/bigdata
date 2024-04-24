@@ -135,11 +135,11 @@ ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 # Install NiFI
 ARG NIFI_VERSION=1.25.0
 RUN curl https://downloads.apache.org/nifi/${NIFI_VERSION}/nifi-${NIFI_VERSION}-bin.zip -o nifi-${NIFI_VERSION}-bin.zip \
- && unzip  nifi-${NIFI_VERSION}-bin.zip -d /usr/local/nifi \
+ && unzip  nifi-${NIFI_VERSION}-bin.zip -d /usr/local/ \
  && rm -rf nifi-${NIFI_VERSION}-bin.zip
-RUN cd /usr/local/nifi \
+RUN cd /usr/local/nifi-${NIFI_VERSION} \
 && bin/nifi.sh install
-RUN mv /tmp/nifi.properties /usr/local/nifi/conf
+RUN mv /tmp/nifi.properties /usr/local/nifi-${NIFI_VERSION}/conf
 
 # Environment
 ENV HADOOP_HOME=/usr/local/hadoop
