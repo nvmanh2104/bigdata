@@ -18,16 +18,19 @@ echo "SPARK_WORKLOAD: $SPARK_WORKLOAD"
 
 if [ "$SPARK_WORKLOAD" == "master1" ];
 then
+    /etc/init.d/nifi start
     start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
 
 if [ "$SPARK_WORKLOAD" == "master2" ];
 then
+    /etc/init.d/nifi start
     start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
 
 if [ "$SPARK_WORKLOAD" == "master3" ];
 then
+    /etc/init.d/nifi start
     start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
 

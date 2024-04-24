@@ -15,7 +15,7 @@ RUN add-apt-repository ppa:openjdk-r/ppa
 
 # install openssh-server, openjdk and wget
 RUN apt-get install -y openssh-server openjdk-8-jdk wget
-RUN apt install nano curl net-tools iputils-ping lsof -y
+RUN apt install nano curl net-tools iputils-ping lsof unzip -y
 
 # install hadoop 2.7.2
 # RUN wget https://github.com/kiwenlau/compile-hadoop/releases/download/2.7.2/hadoop-2.7.2.tar.gz  && \
@@ -132,6 +132,16 @@ RUN chmod u+x /usr/local/spark/sbin/* && \
     chmod u+x /usr/local/spark/bin/*
 ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
+# Install NiFI
+ARG NIFI_VERSION=1.25.0
+RUN curl https://downloads.apache.org/nifi/${NIFI_VERSION}/nifi-${NIFI_VERSION}-bin.zip -o nifi-${NIFI_VERSION}-bin.zip \
+ && unzip  nifi-${NIFI_VERSION}-bin.zip -d /usr/local/nifi \
+ && rm -rf nifi-${NIFI_VERSION}-bin.zip
+RUN cd /usr/local/nifi \
+&& bin/nifi.sh install
+RUN mv /tmp/nifi.properties /usr/local/nifi/conf
+
+# Environment
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HBASE_HOME=/usr/local/hbase
 
