@@ -17,7 +17,7 @@ echo "SPARK_WORKLOAD: $SPARK_WORKLOAD"
 
 
 if [ "$SPARK_WORKLOAD" == "master1" ];
-then
+then    
     /etc/init.d/nifi start
     start-master.sh -h 0.0.0.0 -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 fi 
@@ -58,3 +58,11 @@ fi
 #    echo "else"
 #  #start-master.sh -h hadoop-secondary -p 7077 --webui-port 8080 --properties-file spark-ha.conf
 # fi
+
+#test
+# echo "Start shell............."
+# while [ 1 ]
+# do    
+#     sleep 20
+# done
+# end test

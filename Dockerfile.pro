@@ -23,7 +23,9 @@ RUN apt install nano curl net-tools iputils-ping lsof unzip -y
 #     mv hadoop-2.7.2 /usr/local/hadoop && \
 #     rm hadoop-2.7.2.tar.gz
 
-RUN wget https://archive.apache.org/dist/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz && \
+COPY bigdata-resource/* /tmp/
+
+RUN cd /tmp && \
     tar -xzvf hadoop-3.2.0.tar.gz && \
     mv hadoop-3.2.0 /usr/local/hadoop && \
     rm hadoop-3.2.0.tar.gz
@@ -67,10 +69,10 @@ RUN bash install_hive.sh && \
 #	bin/schematool -initSchema -dbType mysql
 
 
-RUN cd /usr/local && \
-	wget https://archive.apache.org/dist/hbase/2.4.0/hbase-2.4.0-bin.tar.gz && \
+RUN cd /tmp && \	
 	tar -xvf hbase-2.4.0-bin.tar.gz && \
-	mv hbase-2.4.0 hbase
+	mv hbase-2.4.0 /usr/local/hbase && \
+    rm hbase-2.4.0-bin.tar.gz
     
 # COPY source/hbase-2.1.0-bin.tar.gz /usr/local/
 # RUN cd /usr/local && \
@@ -87,17 +89,20 @@ RUN mkdir -p /mnt/dfs/ha-name-dir-shared
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
 # Install phonenix
-RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-5.1.2/phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
-RUN tar -xvf phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
-RUN mv phoenix-hbase-2.4.0-5.1.2-bin /usr/lib/phoenix
-RUN cp /usr/lib/phoenix/phoenix-server-hbase*.jar /usr/local/hbase/lib
+RUN cd /tmp && \
+ tar -xvf phoenix-hbase-2.4.0-5.1.2-bin.tar.gz && \
+ mv phoenix-hbase-2.4.0-5.1.2-bin /usr/lib/phoenix && \
+ cp /usr/lib/phoenix/phoenix-server-hbase*.jar /usr/local/hbase/lib && \
+ rm phoenix-hbase-2.4.0-5.1.2-bin.tar.gz
+
 ENV PHOENIX_HOME=/usr/lib/phoenix
 ENV PATH=$PATH:$PHOENIX_HOME/bin
 # Install phonenix query server
-RUN wget --no-check-certificate https://dlcdn.apache.org/phoenix/phoenix-queryserver-6.0.0/phoenix-queryserver-6.0.0-bin.tar.gz
-RUN tar -xvf phoenix-queryserver-6.0.0-bin.tar.gz
-RUN mv phoenix-queryserver-6.0.0 /usr/lib/phoenix-queryserver
-RUN cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/lib
+RUN cd /tmp && \
+ tar -xvf phoenix-queryserver-6.0.0-bin.tar.gz && \
+ mv phoenix-queryserver-6.0.0 /usr/lib/phoenix-queryserver && \
+ cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/lib && \
+ rm phoenix-queryserver-6.0.0-bin.tar.gz
 ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
 ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
 ENV PATH=$PATH:/usr/local/hbase/lib
@@ -115,9 +120,9 @@ ENV PATH=$PATH:/usr/local/hbase/lib
 # Install Spark
 RUN mkdir -p /usr/local/spark
 ARG SPARK_VERSION=3.4.3
-RUN curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
- && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 \
- && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
+RUN cd /tmp && \
+ tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 && \
+ rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
@@ -134,7 +139,7 @@ ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 # Install NiFI
 ARG NIFI_VERSION=1.25.0
-RUN curl https://downloads.apache.org/nifi/${NIFI_VERSION}/nifi-${NIFI_VERSION}-bin.zip -o nifi-${NIFI_VERSION}-bin.zip \
+RUN cd /tmp \
  && unzip  nifi-${NIFI_VERSION}-bin.zip -d /usr/local/ \
  && rm -rf nifi-${NIFI_VERSION}-bin.zip
 RUN cd /usr/local/nifi-${NIFI_VERSION} \
