@@ -12,6 +12,7 @@ cp /usr/local/hive/lib/mysql-connector-java-8.0.23.jar
 postgre:
 https://jdbc.postgresql.org/download/postgresql-42.6.2.jar
 
+oracle: https://download.oracle.com/otn-pub/otn_software/jdbc/233/ojdbc8.jar
 
 bin/nifi.sh run - Launches the application to run in the foreground
 

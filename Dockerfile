@@ -141,6 +141,7 @@ RUN cd /usr/local/nifi-${NIFI_VERSION} \
 && bin/nifi.sh install
 RUN mv /tmp/nifi.properties /usr/local/nifi-${NIFI_VERSION}/conf
 RUN mv /tmp/state-management.xml /usr/local/nifi-${NIFI_VERSION}/conf
+RUN mv /tmp/login-identity-providers.xml /usr/local/nifi-${NIFI_VERSION}/conf
 
 # Environment
 ENV HADOOP_HOME=/usr/local/hadoop

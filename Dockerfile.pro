@@ -124,7 +124,7 @@ RUN cd /tmp && \
  tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 && \
  rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
 
 ENV PATH="/usr/local/spark/sbin:/usr/local/spark/bin:${PATH}"
 ENV SPARK_HOME=/usr/local/spark
@@ -146,6 +146,7 @@ RUN cd /usr/local/nifi-${NIFI_VERSION} \
 && bin/nifi.sh install
 RUN mv /tmp/nifi.properties /usr/local/nifi-${NIFI_VERSION}/conf
 RUN mv /tmp/state-management.xml /usr/local/nifi-${NIFI_VERSION}/conf
+RUN mv /tmp/login-identity-providers.xml /usr/local/nifi-${NIFI_VERSION}/conf
 
 # Environment
 ENV HADOOP_HOME=/usr/local/hadoop
