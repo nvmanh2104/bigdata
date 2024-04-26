@@ -124,7 +124,7 @@ RUN cd /tmp && \
  tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /usr/local/spark --strip-components 1 && \
  rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 COPY requirements.txt .
-#RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 ENV PATH="/usr/local/spark/sbin:/usr/local/spark/bin:${PATH}"
 ENV SPARK_HOME=/usr/local/spark
