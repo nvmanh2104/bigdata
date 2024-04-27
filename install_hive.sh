@@ -1,5 +1,6 @@
 cd /usr/local
-wget https://mirror.downloadvn.com/apache/hive/stable-2/apache-hive-2.3.9-bin.tar.gz
+#wget https://mirror.downloadvn.com/apache/hive/stable-2/apache-hive-2.3.9-bin.tar.gz
+cp /tmp/apache-hive-2.3.9-bin.tar.gz /usr/local
 
 tar zxvf apache-hive-2.3.9-bin.tar.gz
 mv apache-hive-2.3.9-bin hive

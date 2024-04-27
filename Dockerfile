@@ -142,6 +142,12 @@ RUN cd /usr/local/nifi-${NIFI_VERSION} \
 RUN mv /tmp/nifi.properties /usr/local/nifi-${NIFI_VERSION}/conf
 RUN mv /tmp/state-management.xml /usr/local/nifi-${NIFI_VERSION}/conf
 RUN mv /tmp/login-identity-providers.xml /usr/local/nifi-${NIFI_VERSION}/conf
+# Install NiFi tookit
+RUN curl https://dlcdn.apache.org/nifi/1.25.0/nifi-toolkit-1.25.0-bin.zip -o nifi-toolkit-1.25.0-bin.zip \
+&& unzip  nifi-toolkit-1.25.0-bin.zip -d /usr/local/nifi-${NIFI_VERSION} \
+&& rm -rf nifi-toolkit-1.25.0-bin.zip
+RUN cd /usr/local/nifi-${NIFI_VERSION}/nifi-toolkit-1.25.0 \
+&& bin/tls-toolkit.sh standalone -n '0.0.0.0' -C 'CN=kttv,OU=NIFI'
 
 # Environment
 ENV HADOOP_HOME=/usr/local/hadoop
