@@ -77,9 +77,11 @@ RUN cd /usr/local && \
 # 	tar -xvf hbase-2.1.0-bin.tar.gz && \
 # 	mv hbase-2.1.0 hbase
 
-ADD hbase-env.sh  /usr/local/hbase/conf/hbase-env.sh
-ADD hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
-ADD regionservers /usr/local/hbase/conf/regionservers
+RUN mv /tmp/hbase-env.sh  /usr/local/hbase/conf/hbase-env.sh
+RUN mv /tmp/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
+RUN mv /tmp/regionservers /usr/local/hbase/conf/regionservers
+RUN mv /tmp/backup-masters /usr/local/hbase/conf/backup-masters
+
 ENV PATH=$PATH:/usr/local/hbase/bin
 # HA folder shared
 RUN mkdir -p /mnt/dfs/ha-name-dir-shared
