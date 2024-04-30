@@ -45,16 +45,16 @@ RUN mkdir -p ~/hdfs/namenode && \
 
 COPY config/* /tmp/
 
-RUN mv /tmp/ssh_config ~/.ssh/config && \
-    mv /tmp/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
-    mv /tmp/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml && \ 
-    mv /tmp/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml && \
-    mv /tmp/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml && \
-    mv /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
-    mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
-    mv /tmp/workers $HADOOP_HOME/etc/hadoop/workers && \
+RUN cp -f /tmp/ssh_config ~/.ssh/config && \
+    cp -f /tmp/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
+    cp -f /tmp/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml && \ 
+    cp -f /tmp/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml && \
+    cp -f /tmp/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml && \
+    cp -f /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
+    cp -f /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
+    cp -f /tmp/workers $HADOOP_HOME/etc/hadoop/workers && \
     #mv /tmp/start-hadoop.sh ~/start-hadoop.sh && \
-    mv /tmp/run-wordcount.sh ~/run-wordcount.sh
+    cp -f /tmp/run-wordcount.sh ~/run-wordcount.sh
 
 RUN chmod +x ~/run-wordcount.sh && \
     #chmod +x ~/start-hadoop.sh && \    
@@ -79,10 +79,11 @@ RUN cd /tmp && \
 # 	tar -xvf hbase-2.1.0-bin.tar.gz && \
 # 	mv hbase-2.1.0 hbase
 
-RUN mv /tmp/hbase-env.sh  /usr/local/hbase/conf/hbase-env.sh
-RUN mv /tmp/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
-RUN mv /tmp/regionservers /usr/local/hbase/conf/regionservers
-RUN mv /tmp/backup-masters /usr/local/hbase/conf/backup-masters
+RUN cp -f /tmp/hbase-env.sh  /usr/local/hbase/conf/hbase-env.sh
+RUN cp -f /tmp/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
+RUN cp -f /tmp/regionservers /usr/local/hbase/conf/regionservers
+RUN cp -f /tmp/backup-masters /usr/local/hbase/conf/backup-masters
+RUN cp -f /tmp/hdfs-site.xml /usr/local/hbase/conf/hdfs-site.xml
 ENV PATH=$PATH:/usr/local/hbase/bin
 # HA folder shared
 RUN mkdir -p /mnt/dfs/ha-name-dir-shared
@@ -99,14 +100,14 @@ RUN cd /tmp && \
 ENV PHOENIX_HOME=/usr/lib/phoenix
 ENV PATH=$PATH:$PHOENIX_HOME/bin
 # Install phonenix query server
-RUN cd /tmp && \
- tar -xvf phoenix-queryserver-6.0.0-bin.tar.gz && \
- mv phoenix-queryserver-6.0.0 /usr/lib/phoenix-queryserver && \
- cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/lib && \
- rm phoenix-queryserver-6.0.0-bin.tar.gz
-ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
-ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
-ENV PATH=$PATH:/usr/local/hbase/lib
+# RUN cd /tmp && \
+#  tar -xvf phoenix-queryserver-6.0.0-bin.tar.gz && \
+#  mv phoenix-queryserver-6.0.0 /usr/lib/phoenix-queryserver && \
+#  cp /usr/lib/phoenix-queryserver/phoenix-queryserver*.jar /usr/local/hbase/lib && \
+#  rm phoenix-queryserver-6.0.0-bin.tar.gz
+# ENV PHOENIX_QUERYSERVER=/usr/lib/phoenix-queryserver
+# ENV PATH=$PATH:$PHOENIX_QUERYSERVER/bin
+# ENV PATH=$PATH:/usr/local/hbase/lib
 # Install Zookeeper
 # RUN mkdir -p /opt/zookeeper
 # RUN mkdir -p /data/zookeeper
