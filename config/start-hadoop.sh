@@ -17,3 +17,7 @@ bash /usr/local/hbase/bin/start-hbase.sh
 
 # chay tren ca 3 master node
 hbase thrift start -p 6660
+
+# hive
+hive --service metastore --hiveconf hive.root.logger=INFO,console
+hive --service hiveserver2 --hiveconf hive.root.logger=INFO,console

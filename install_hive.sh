@@ -13,8 +13,10 @@ echo 'export PATH=$PATH:$HIVE_HOME/bin' >> ~/.bashrc
 cd hive
 cp conf/hive-env.sh.template conf/hive-env.sh
 echo 'export HADOOP_HOME="/usr/local/hadoop"' >> /usr/local/hive/hive-env.sh
+cp /tmp/hivemetastore-site.xml /usr/local/hive/conf
+cp /tmp/hiveserver2-site.xml /usr/local/hive/conf
 
-cp ~/hive-site.xml /usr/local/hive/conf
+#cp ~/hive-site.xml /usr/local/hive/conf
 
 # cd /usr/local/hive
 # wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.23.tar.gz

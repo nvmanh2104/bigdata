@@ -24,6 +24,7 @@ RUN apt install nano curl net-tools iputils-ping lsof unzip -y
 #     rm hadoop-2.7.2.tar.gz
 
 COPY bigdata-resource/* /tmp/
+COPY bigdata-resource/jdbc/*.jar /tmp/jdbc/
 
 RUN cd /tmp && \
     tar -xzvf hadoop-3.2.0.tar.gz && \
@@ -62,7 +63,7 @@ RUN chmod +x ~/run-wordcount.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh 
 
 ADD install_hive.sh install_hive.sh
-ADD hive-site.xml hive-site.xml
+#ADD hive-site.xml hive-site.xml
 RUN bash install_hive.sh && \
 	cd /usr/local/hive && \
 	echo 1
@@ -157,11 +158,11 @@ RUN cd /usr/local/nifi-${NIFI_VERSION}/nifi-toolkit-1.25.0 \
 && bin/tls-toolkit.sh standalone -n '0.0.0.0' -C 'CN=kttv,OU=NIFI'
 # JDBC LIBS
 RUN mkdir -p /usr/local/jdbc-libs
-RUN cp -f /tmp/bigdata-resource/*.jar /usr/local/jdbc-libs/
+RUN cp -f /tmp/jdbc/*.jar /usr/local/jdbc-libs/
     # hive lib
-RUN cp -f /tmp/bigdata-resource/*.jar /usr/local/hive/lib/
+RUN cp -f /tmp/jdbc/*.jar /usr/local/hive/lib/
     # nifi lib
-RUN cp -f /tmp/bigdata-resource/*.jar /usr/local/nifi-${NIFI_VERSION}/lib/
+RUN cp -f /tmp/jdbc/*.jar /usr/local/nifi-${NIFI_VERSION}/lib/
 # Environment
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HBASE_HOME=/usr/local/hbase
