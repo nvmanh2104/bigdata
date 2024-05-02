@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+
+	<property>
+		<name>javax.jdo.option.ConnectionURL</name>
+		<value>jdbc:postgresql://bigdata_postgres:5432/metastore</value>
+	</property>
+
+	<property>
+		<name>javax.jdo.option.ConnectionDriverName</name>
+		<value>org.postgresql.Driver</value>
+	</property>
+
+	<property>
+		<name>javax.jdo.option.ConnectionUserName</name>
+		<value>postgres</value>
+	</property>
+
+	<property>
+		<name>javax.jdo.option.ConnectionPassword</name>
+		<value>postgres</value>
+	</property>
+
+	<property>
+		<name>datanucleus.autoCreateSchema</name>
+		<value>false</value>
+	</property>
+
+	<property>
+		<name>datanucleus.fixedDatastore</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>datanucleus.autoStartMechanism</name> 
+		<value>SchemaTable</value>
+	</property> 
+
+	<property>
+		<name>hive.metastore.event.db.notification.api.auth</name>
+		<value>false</value>
+		<description>
+       Should metastore do authorization against database notification related APIs such as get_next_notification.
+       If set to true, then only the superusers in proxy settings have the permission
+		</description>
+	</property>
+
+</configuration>

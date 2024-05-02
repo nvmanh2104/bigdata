@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+
+	<property>
+		<name>hive.metastore.uris</name>
+		<value>thrift://hadoop-master1:9083</value>
+		<description>By specify this we do not use local mode of metastore</description>
+	</property>
+
+	<property>
+		<name>hive.server2.authentication</name>
+		<value>NONE</value>
+	</property>
+
+</configuration>
