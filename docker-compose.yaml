@@ -38,6 +38,8 @@ services:
             - ha-name-dir-shared:/mnt/dfs/ha-name-dir-shared
             - spark-master1-logs:/opt/spark/spark-events           
             - hbase-zookeeper1-data:/usr/local/zookeeper
+            - hive-data-warehouse:/hive/warehouse
+            - bigdata-jdbc-libs:/usr/local/jdbc-libs
 
     hadoop-master2:
         image: ngovanmanh/hadoop:3.2.2      
@@ -72,7 +74,9 @@ services:
             - namenode2:/root/hdfs/namenode
             - ha-name-dir-shared:/mnt/dfs/ha-name-dir-shared
             - spark-master2-logs:/opt/spark/spark-events
-            - hbase-zookeeper1-data:/usr/local/zookeeper         
+            - hbase-zookeeper1-data:/usr/local/zookeeper     
+            - hive-data-warehouse:/hive/warehouse    
+            - bigdata-jdbc-libs:/usr/local/jdbc-libs
 
     hadoop-master3:
         image: ngovanmanh/hadoop:3.2.2       
@@ -108,6 +112,7 @@ services:
             - ha-name-dir-shared:/mnt/dfs/ha-name-dir-shared
             - spark-master3-logs:/opt/spark/spark-events          
             - hbase-zookeeper1-data:/usr/local/zookeeper
+            - bigdata-jdbc-libs:/usr/local/jdbc-libs
 
     hadoop-slave1:
         image: ngovanmanh/hadoop:3.2.2      
@@ -138,6 +143,7 @@ services:
         volumes:
             - datanode1:/root/hdfs/datanode
             - spark-node1-logs:/opt/spark/spark-events
+            - hive-data-warehouse:/hive/warehouse
 
     hadoop-slave2:
         image: ngovanmanh/hadoop:3.2.2  
@@ -363,6 +369,20 @@ volumes:
             type: none
             o: bind
             device: "/opt/bigdata/hbase/zookeeper3"
+
+    hive-data-warehouse:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/hive/warehouse"
+    
+    bigdata-jdbc-libs:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/opt/bigdata/jdbc-libs"
 
     # datanode4:   
     #     driver: local     

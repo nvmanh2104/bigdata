@@ -1,3 +1,4 @@
+mkdir -p /hive/warehouse
 cd /usr/local
 #wget https://mirror.downloadvn.com/apache/hive/stable-2/apache-hive-2.3.9-bin.tar.gz
 cp /tmp/apache-hive-2.3.9-bin.tar.gz /usr/local
@@ -15,8 +16,8 @@ echo 'export HADOOP_HOME="/usr/local/hadoop"' >> /usr/local/hive/hive-env.sh
 
 cp ~/hive-site.xml /usr/local/hive/conf
 
-cd /usr/local/hive
-wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.23.tar.gz
-tar xvf mysql-connector-java-8.0.23.tar.gz
-cd mysql-connector-java-8.0.23
-cp mysql-connector-java-8.0.23.jar /usr/local/hive/lib/
+# cd /usr/local/hive
+# wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.23.tar.gz
+# tar xvf mysql-connector-java-8.0.23.tar.gz
+# cd mysql-connector-java-8.0.23
+# cp mysql-connector-java-8.0.23.jar /usr/local/hive/lib/

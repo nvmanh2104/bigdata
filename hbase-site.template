@@ -374,6 +374,3 @@
   <name>zookeeper.znode.parent</name>
   <value>/hbase</value>
 </property>
-
-
-https://github.com/forcedotcom/phoenix/issues/730

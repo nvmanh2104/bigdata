@@ -155,7 +155,13 @@ RUN cd /tmp \
 && rm -rf nifi-toolkit-1.25.0-bin.zip
 RUN cd /usr/local/nifi-${NIFI_VERSION}/nifi-toolkit-1.25.0 \
 && bin/tls-toolkit.sh standalone -n '0.0.0.0' -C 'CN=kttv,OU=NIFI'
-
+# JDBC LIBS
+RUN mkdir -p /usr/local/jdbc-libs
+RUN cp -f /tmp/bigdata-resource/*.jar /usr/local/jdbc-libs/
+    # hive lib
+RUN cp -f /tmp/bigdata-resource/*.jar /usr/local/hive/lib/
+    # nifi lib
+RUN cp -f /tmp/bigdata-resource/*.jar /usr/local/nifi-${NIFI_VERSION}/lib/
 # Environment
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HBASE_HOME=/usr/local/hbase
