@@ -14,6 +14,7 @@ services:
             - 7077:7077
             - 8443:8443
             - 8001:8888
+            - 10002:10002
         hostname: hadoop-master1
         environment:
             - SPARK_NO_DAEMONIZE=true               
@@ -55,6 +56,7 @@ services:
             - 7177:7077
             - 8444:8443
             - 8002:8888
+            - 10003:10002
         hostname: hadoop-master2
         environment:
             - SPARK_NO_DAEMONIZE=true                 
@@ -92,6 +94,7 @@ services:
             - 7277:7077
             - 8445:8443
             - 8003:8888
+            - 10002:10002
         hostname: hadoop-master3
         environment:
             - SPARK_NO_DAEMONIZE=true              
