@@ -41,6 +41,7 @@ services:
             - hbase-zookeeper1-data:/usr/local/zookeeper
             - hive-data-warehouse:/hive/warehouse
             - bigdata-jdbc-libs:/usr/local/jdbc-libs
+            - import_data_folder:/root/bigdata
 
     hadoop-master2:
         image: ngovanmanh/hadoop:3.2.2      
@@ -386,6 +387,13 @@ volumes:
             type: none
             o: bind
             device: "/opt/bigdata/jdbc-libs"
+
+    import_data_folder:   
+        driver: local     
+        driver_opts:
+            type: none
+            o: bind
+            device: "/home/bigdata"
 
     # datanode4:   
     #     driver: local     
