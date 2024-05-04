@@ -1,0 +1,31 @@
+version: '3.6'
+services:
+  bigdata-mongodb:
+    image: mongo:4.4    
+    ports:
+      - 60001:27017
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=admin
+        - MONGO_INITDB_ROOT_PASSWORD=bigdata@0258    
+    volumes:
+      - bigdata_mongodb:/data/db
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+           - node.hostname==kttv1
+    networks: 
+      - hadoop
+ 
+networks:
+    hadoop:
+        external: true    
+
+volumes:          
+  bigdata_mongodb:
+    driver: local 
+    driver_opts:
+        type: none
+        o: bind
+        device: "/opt/bigdata/mongodb"        
+    
