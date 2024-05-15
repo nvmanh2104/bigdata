@@ -11,7 +11,7 @@ service ssh start
 # done
 #end test
 
-SPARK_WORKLOAD="${DEPLOY_ENV}"
+SPARK_WORKLOAD="${SPARK_TYPE}"
 
 echo "SPARK_WORKLOAD: $SPARK_WORKLOAD"
 
