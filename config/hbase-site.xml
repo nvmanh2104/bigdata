@@ -42,15 +42,15 @@
 
  <property>
     <name>hbase.master</name>
-    <value>hadoop-master1:60010</value>
+    <value>hadoop-master:60010</value>
   </property>
   <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://kttvcluster/hbase</value>
+    <value>hdfs://hadoop-master:9000/hbase</value>
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>hadoop-master1,hadoop-master2,hadoop-master3</value>
+    <value>hadoop-master</value>
   </property>
   <property>
    	<name>hbase.master.info.port</name>

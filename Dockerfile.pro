@@ -131,7 +131,7 @@ COPY requirements.txt .
 
 ENV PATH="/usr/local/spark/sbin:/usr/local/spark/bin:${PATH}"
 ENV SPARK_HOME=/usr/local/spark
-ENV SPARK_MASTER="spark://hadoop-master1:7077"
+ENV SPARK_MASTER="spark://hadoop-master:7077"
 ENV SPARK_MASTER_HOST hadoop-master1
 ENV SPARK_MASTER_PORT 7077
 ENV PYSPARK_PYTHON python3
@@ -182,7 +182,7 @@ RUN mv /tmp/spark-ha.conf /root/spark-ha.conf
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD [ "sh", "-c", "service ssh start; bash entrypoint.sh" ]
 
 # WORKDIR  /home/
 # ADD start-terminal.sh /home/start-terminal.sh
