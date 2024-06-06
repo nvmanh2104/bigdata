@@ -1,0 +1,31 @@
+version: '3'
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    hostname: elastic
+    container_name: elastic
+    expose:
+      - 9200 
+    ports:
+      - "9200:9200"
+    restart: always
+    environment:
+      - discovery.type=single-node
+      
+    volumes:
+      - detai_esdata:/usr/share/elasticsearch/data
+    
+    networks:
+      - vienai_system_network
+
+networks:
+  vienai_system_network:
+    external: true
+
+volumes:
+  detai_esdata:   
+    driver: local     
+    driver_opts:
+        type: none
+        o: bind
+        device: "/home/cdh/projects/data/elastic" 
